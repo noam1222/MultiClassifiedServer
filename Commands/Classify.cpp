@@ -25,11 +25,13 @@ void Classify::execute() {
     ofstream resultFile(resultFileName);
     string line;
     try {
+        int lineNum = 1;
         while (getline(sourceFile, line)) {
             vector<string> vecToCompStr = ExtractData::splitString(line, " ");
             vector<double> vecToComp = ExtractData::strVectorToDouble(vecToCompStr);
             string result = knn.getDefinition(vecToComp);
-            resultFile << line << " " << result << "\n";
+            resultFile << lineNum << " " << result << "\n";
+            lineNum++;
         }
         m_df->write("classifying data complete");
         m_data.Classified();
