@@ -14,16 +14,25 @@ private:
     bool m_classified;
     unsigned int m_k;
     string m_distanceMethodStr;
+    string m_classifiedFilePath;
+    string m_unclassifiedFilePath;
+    string m_resultFileName;
 public:
     CommandsData();
     bool hasUploadedFiles() const;
     bool hasClasiifiedFile() const;
-    int getK() const;
+    unsigned int getK() const;
     string getDistanceMethod() const;
+    string getClassifiedFileName() const;
+    string getUnclassifiedFileName() const;
+    string getResultFileName() const;
     void Uploaded();
     void Classified();
     void setK(unsigned int k);
     void setDistanceMethod(string distanceMethod);
+    void setClassifiedFilePath(string classifiedFilePath);
+    void setUnclassifiedFilePath(string unclassifiedFilePath);
+    void setResultFileName(string resultFile);
 };
 
 

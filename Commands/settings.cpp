@@ -3,7 +3,7 @@
 
 /**
  * constructor
- * @param df
+ * @param df the IO to write from or read to
  */
 Settings::Settings(DefaultIO *df) : Command("algorithm setting", df) {
 }

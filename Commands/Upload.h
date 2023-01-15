@@ -4,6 +4,9 @@
 #include "Command.h"
 #include "string"
 
+/**
+ * class for upload command.
+ */
 class Upload : public Command {
 private:
     const string PATH = "clients_data/";
