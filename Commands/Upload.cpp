@@ -7,16 +7,6 @@
  */
 Upload::Upload(DefaultIO *df, CommandsData &data) : Command("upload an unclassified csv data file", df, data){}
 
-/**
- * crate file in received path and with received content
- * @param path path to create the file in. if already exist, will override it.
- * @param content content to write to the file/
- */
-void Upload::createFile(string &path, string &content){
-    ofstream file(path);
-    file << content;
-    file.close();
-}
 
 /**
  * receive and save the uploaded files from the client.
@@ -24,15 +14,23 @@ void Upload::createFile(string &path, string &content){
 void Upload::execute() {
     m_df->write("Please upload your local train CSV file.");
     string content = m_df->read();
-    string path = PATH + "classified";
-    createFile(path, content);
+    if (!content.length()) {
+        return;
+    }
+    string path = PATH + "classified.csv";
+    ExtractData::writeToFile(path, content);
     m_data.setClassifiedFilePath(path);
+    m_df->write("Upload complete.");
 
     m_df->write("Please upload your local test CSV file.");
     content = m_df->read();
-    path = PATH + "unclassified";
-    createFile(path, content);
+    if (!content.length()) {
+        return;
+    }
+    path = PATH + "unclassified.csv";
+    ExtractData::writeToFile(path, content);
     m_data.setUnclassifiedFilePath(path);
-
     m_df->write("Upload complete.");
+
+    m_data.Uploaded(); //notice that the user upload the files
 }

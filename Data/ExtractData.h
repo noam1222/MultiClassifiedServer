@@ -19,6 +19,8 @@ using namespace std;
 */
 class ExtractData {
 public:
+    static string readFromFile(string filepath);
+    static void writeToFile(string outputPath, string content);
     static int parseStringToInt(const string &s);
     static Distance* getDistanceByStr(const string &str);
     static vector<double> strVectorToDouble(vector<string> vStr);

@@ -15,7 +15,7 @@
 class CLI {
 private:
     DefaultIO *m_df;
-    Command **m_commands;
+    Command *m_commands[5];
     CommandsData m_data;
     void menu();
 public:

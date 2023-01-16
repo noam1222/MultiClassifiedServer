@@ -6,37 +6,33 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#include "ExtractData.h"
+#include "Data/ExtractData.h"
 #include "SocketIO.h"
 
 #define END_MSG "EOF"
-#define INVALID_INPUT "Invalid Input"
+#define INVALID_INPUT "invalid input"
 
 using namespace std;
 
 void uploadFile(SocketIO *socketIo) {
     string uploadFin;
-    string trainCSV;
-    string testCSV;
     //receive from server to print train/test CSV
     for (int i = 1; i < 3; ++i) {
-        if (i == 1) {
-            trainCSV = socketIo->read();
-            cout << trainCSV << endl;
-        } else {
-            testCSV = socketIo->read();
-            cout << testCSV << endl;
-        }
+        string ret = socketIo->read();
+        cout << ret << endl;
         //receive path from user
         string path;
         getline(cin, path);
         //checks if path is valid
+        string fileToUpload;
         try {
-            string fileToUpload = ExtractData::fileToUpload(path);
+            fileToUpload = ExtractData::readFromFile(path);
         } catch (invalid_argument) {
-            cout << path + "Not Found" << endl;
+            cout << path + " Not Found" << endl;
+            socketIo->write("");
+            return;
         }
-        socketIo->write(path);
+        socketIo->write(fileToUpload);
         //waiting for response from server that upload is complete
         uploadFin = socketIo->read();
         cout << uploadFin << endl;
@@ -52,30 +48,38 @@ void editSettings(SocketIO *socketIo) {
     cout << currentSettings << endl;
     getline(cin, newSettings);
     if (!(newSettings.length())) {
-        socketIo->write(END_MSG);
+        socketIo->write("");
+        return;
     }
     vector<string> settings = ExtractData::splitString(newSettings, " ");
     if (settings.size() != 2) {
         cout << INVALID_INPUT << endl;
+        socketIo->write("");
+        return;
+    }
+    //checks if K is valid
+    bool k = true;
+    try {
+        if (ExtractData::parseStringToInt(settings.at(0)) <= 0) {
+            throw invalid_argument("k must be positive");
+        }
+    } catch (invalid_argument) {
+        k = false;
+        cout << "invalid value for K" << endl;
     }
     //checks if distance is valid
     try {
         ExtractData::getDistanceByStr(settings.at(1));
     } catch (invalid_argument) {
         validDistance = false;
+        cout << "invalid value for metric " << endl;
     }
-    int K;
-    //checks if K is valid
-    try {
-        K = ExtractData::parseStringToInt(settings.at(0));
-    } catch (invalid_argument) {
-        cout << "invalid value for K" << endl;
-        if (!(validDistance)) {
-            cout << "invalid value for metric " << endl;
-        }
-        return;
+
+    if (validDistance && k) {
+        socketIo->write(settings.at(0) + " " + settings.at(1));
+    } else {
+        socketIo->write("");
     }
-    socketIo->write(settings.at(0) + " " + settings.at(1));
 }
 
 void classData(SocketIO *socketIo) {
@@ -109,7 +113,7 @@ void downResults(SocketIO *socketIo) {
 
 int main(int argc, char **argv) {
     //Connection to server socket
-
+    cout << argv[0] << endl;
     if (argc != 3) {
         cout << INVALID_INPUT << endl;
     }
@@ -148,14 +152,12 @@ int main(int argc, char **argv) {
         exit(0);
     }
 
-    auto *socketIo = new SocketIO(sock);
+    SocketIO *socketIo = new SocketIO(sock);
     string mainMenu = socketIo->read();
     cout << mainMenu << endl;
     bool toRun = true;
     //loop with user
     while (true) {
-//printing main menu in loop
-        cout << mainMenu << endl;
         //receiving input from user
         string input;
         getline(cin, input);
@@ -164,6 +166,7 @@ int main(int argc, char **argv) {
             option = ExtractData::parseStringToInt(input);
         } catch (invalid_argument) {
             cout << INVALID_INPUT << endl;
+            continue;
         }
         switch (option) {
             case 1:
@@ -197,8 +200,8 @@ int main(int argc, char **argv) {
         if (!(toRun)) {
             break;
         }
-
-
+        //printing main menu in loop
+        cout << mainMenu << endl;
     }
 
     close(sock);

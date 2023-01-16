@@ -26,7 +26,7 @@ string SocketIO::read() {
     size_t delim;
     bool connectionClose = false;
     while ((delim = result.find(MSG_END)) == string::npos) {
-        ssize_t recv_bytes = recv(m_sockNum, &m_buffer, m_bufferSize, 0);
+        ssize_t recv_bytes = recv(m_sockNum, m_buffer, m_bufferSize, 0);
         if (recv_bytes == 0) {
             connectionClose = true;
             continue;
@@ -49,7 +49,7 @@ string SocketIO::read() {
  * @param s data to send to client. s.length() <= BUFFER_SIZE
  */
 void SocketIO::sendBufferSizeOrLess(string s) {
-    ssize_t sent_bytes = send(m_sockNum, &m_buffer, s.length(), 0);
+    ssize_t sent_bytes = send(m_sockNum, &s[0], s.length(), 0);
     if (sent_bytes < 0) {
         perror("error in sending");
         exit(1);
@@ -61,10 +61,10 @@ void SocketIO::sendBufferSizeOrLess(string s) {
  * @param s data to send to client.
  */
 void SocketIO::write(string s) {
-    s += EOF;
-    while (s.length() > 4096) {
+    s += MSG_END;
+    while (s.length() > BUFFER_SIZE) {
         string toSend = s.substr(0, 4096);
-        s = s.substr(4096);
+        s = s.substr(BUFFER_SIZE);
         sendBufferSizeOrLess(toSend);
     }
     sendBufferSizeOrLess(s);

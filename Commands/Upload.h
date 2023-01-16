@@ -3,6 +3,7 @@
 
 #include "Command.h"
 #include "string"
+#include "../Data/ExtractData.h"
 
 /**
  * class for upload command.
@@ -10,7 +11,6 @@
 class Upload : public Command {
 private:
     const string PATH = "clients_data/";
-    static void createFile(string &name, string &content);
 public:
     Upload(DefaultIO *df, CommandsData &data);
     void execute() override;

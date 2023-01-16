@@ -11,10 +11,6 @@ Display::Display(DefaultIO *df, CommandsData &data) : Command("display results",
  * sent the client the results
  */
 void Display::execute() {
-    ifstream resultFile(m_data.getResultFileName());
-    string result, line;
-    while(getline(resultFile, line)) {
-        result += line;
-    }
+    string result = ExtractData::readFromFile(m_data.getResultFileName());
     m_df->write(result + "Done.");
 }

@@ -32,10 +32,11 @@ void CLI::menu() {
 void CLI::run() {
     menu();
     int choose = ExtractData::parseStringToInt(m_df->read());
+    choose--;
     while (choose != 8) {
         m_commands[choose]->execute();
-        menu();
         choose = ExtractData::parseStringToInt(m_df->read());
+        choose--;
     }
 }
 

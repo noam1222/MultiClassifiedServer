@@ -3,7 +3,7 @@
 #include <fstream>
 #include "ExtractData.h"
 
-string ExtractData::fileToUpload(string filepath) {
+string ExtractData::readFromFile(string filepath) {
     string content;
     string line;
     //open a file in read mode
@@ -13,7 +13,7 @@ string ExtractData::fileToUpload(string filepath) {
         throw invalid_argument(filepath + " Not Found");
     }
     while (getline(infile, line)){
-        content += line;
+        content += line + "\n";
     }
 
     infile.close();
@@ -25,7 +25,7 @@ void ExtractData::writeToFile(string outputPath, string content) {
     ofstream outfile;
     outfile.open(outputPath, ios::out);
     if(!outfile) {
-        throw invalid_argument(outputPath + " Not Found");
+        throw invalid_argument(outputPath + " Not created");
     }
     outfile << content << endl;
 }

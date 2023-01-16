@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
     }
 
     //contact with client
-    SocketIO sio(sock);
+    SocketIO sio(client_sock);
     CLI cli(&sio);
     cli.run();
 

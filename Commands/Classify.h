@@ -2,10 +2,10 @@
 #define MULTICLASSIFIEDSERVER_CLASSIFY_H
 
 #include "Command.h"
-#include "Algorithm/KnnAlgorithm.h"
-#include "Algorithm/Neighbor.h"
-#include "Data/ExtractData.h"
-#include "Distances/Distance.h"
+#include "../Algorithm/KnnAlgorithm.h"
+#include "../Algorithm/Neighbor.h"
+#include "../Data/ExtractData.h"
+#include "../Distances/Distance.h"
 #include "fstream"
 #include <vector>
 
