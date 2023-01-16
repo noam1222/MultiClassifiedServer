@@ -15,5 +15,5 @@ void Display::execute() {
     while(getline(resultFile, line)) {
         result += line;
     }
-    m_df->write(result);
+    m_df->write(result + "Done.");
 }

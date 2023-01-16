@@ -20,6 +20,7 @@ protected:
     Command(string description, DefaultIO *df);
 public:
     virtual void execute() = 0;
+    string getDescription();
 };
 
 

@@ -10,3 +10,9 @@ Command::Command(string description, DefaultIO *df) {
     m_df = df;
     m_data = CommandsData();
 }
+
+/**
+ * get the string description of the command
+ * @return the string description of the command
+ */
+string Command::getDescription() { return m_description; }

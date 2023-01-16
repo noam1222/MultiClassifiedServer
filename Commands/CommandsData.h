@@ -6,7 +6,7 @@
 using namespace std;
 
 /**
- * class for the shared date of the commands
+ * class for the shared date of the m_commands
  */
 class CommandsData {
 private:
