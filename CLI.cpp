@@ -6,11 +6,12 @@
  */
 CLI::CLI(DefaultIO *df) {
     m_df = df;
-    m_commands[0] = new Upload(m_df);
-    m_commands[1] = new Settings(m_df);
-    m_commands[2] = new Classify(m_df);
-    m_commands[3] = new Display(m_df);
-    m_commands[4] = new Download(m_df);
+    m_data = CommandsData();
+    m_commands[0] = new Upload(m_df, m_data);
+    m_commands[1] = new Settings(m_df, m_data);
+    m_commands[2] = new Classify(m_df, m_data);
+    m_commands[3] = new Display(m_df, m_data);
+    m_commands[4] = new Download(m_df, m_data);
 }
 
 /**

@@ -3,8 +3,9 @@
 /**
  * constructor
  * @param df the IO to write from or read to
+ * @param data the shared data of the commands
  */
-Download::Download(DefaultIO *df) : Command("download results", df){}
+Download::Download(DefaultIO *df, CommandsData &data) : Command("download results", df, data){}
 
 /**
  * sent the client the results

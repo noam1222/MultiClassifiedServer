@@ -14,7 +14,7 @@
  */
 class Classify : public Command {
 public:
-    Classify(DefaultIO *df);
+    Classify(DefaultIO *, CommandsData &data);
     void execute() override;
 };
 

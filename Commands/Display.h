@@ -9,7 +9,7 @@
  */
 class Display : public Command {
 public:
-    Display(DefaultIO *df);
+    Display(DefaultIO *df, CommandsData &data);
     void execute() override;
 };
 

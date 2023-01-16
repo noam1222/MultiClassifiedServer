@@ -10,9 +10,9 @@
 class Upload : public Command {
 private:
     const string PATH = "clients_data/";
-    void createFile(string name, string content);
+    static void createFile(string &name, string &content);
 public:
-    Upload(DefaultIO *df);
+    Upload(DefaultIO *df, CommandsData &data);
     void execute() override;
 };
 

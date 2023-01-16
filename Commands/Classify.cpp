@@ -3,8 +3,9 @@
 /**
  * constructor
  * @param df the IO to write from or read to
+ * @param data the shared data of the commands
  */
-Classify::Classify(DefaultIO *df) : Command("classify data", df){}
+Classify::Classify(DefaultIO *df, CommandsData &data) : Command("classify data", df, data){}
 
 /**
  * execute the command - classify al the vector in the unclassified file based on the classified file.

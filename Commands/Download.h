@@ -9,7 +9,7 @@
  */
 class Download : public Command{
 public:
-    Download(DefaultIO *df);
+    Download(DefaultIO *, CommandsData &data);
     void execute() override;
 };
 

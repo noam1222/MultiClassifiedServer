@@ -3,15 +3,16 @@
 /**
  * constructor
  * @param df the IO to write from or read to
+ * @param data the shared data of the commands
  */
-Upload::Upload(DefaultIO *df) : Command("upload an unclassified csv data file", df){}
+Upload::Upload(DefaultIO *df, CommandsData &data) : Command("upload an unclassified csv data file", df, data){}
 
 /**
  * crate file in received path and with received content
  * @param path path to create the file in. if already exist, will override it.
  * @param content content to write to the file/
  */
-void Upload::createFile(string path, string content){
+void Upload::createFile(string &path, string &content){
     ofstream file(path);
     file << content;
     file.close();

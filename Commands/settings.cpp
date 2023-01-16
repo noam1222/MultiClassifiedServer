@@ -4,8 +4,9 @@
 /**
  * constructor
  * @param df the IO to write from or read to
+ * @param data the shared data of the commands
  */
-Settings::Settings(DefaultIO *df) : Command("algorithm setting", df) {
+Settings::Settings(DefaultIO *df, CommandsData &data) : Command("algorithm setting", df, data) {
 }
 
 /**

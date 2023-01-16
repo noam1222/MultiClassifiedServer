@@ -8,7 +8,7 @@
  */
 class Settings : public Command{
 public:
-    Settings(DefaultIO *df);
+    Settings(DefaultIO *df, CommandsData &data);
     void execute() override;
 };
 
