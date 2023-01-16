@@ -185,7 +185,7 @@ int main(int argc, char **argv) {
                 break;
             case 5:
                 socketIo->write(input);
-                downResults();
+                downResults(socketIo);
                 break;
             case 8:
                 socketIo->write(input);
