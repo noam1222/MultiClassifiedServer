@@ -1,5 +1,34 @@
+#include "ExtractData.h"
+
 #include <fstream>
 #include "ExtractData.h"
+
+string ExtractData::fileToUpload(string filepath) {
+    string content;
+    string line;
+    //open a file in read mode
+    ifstream infile;
+    infile.open(filepath, ios::in);
+    if (!infile) {
+        throw invalid_argument(filepath + " Not Found");
+    }
+    while (getline(infile, line)){
+        content += line;
+    }
+
+    infile.close();
+    return content;
+}
+
+void ExtractData::writeToFile(string outputPath, string content) {
+//open a file in write mode
+    ofstream outfile;
+    outfile.open(outputPath, ios::out);
+    if(!outfile) {
+        throw invalid_argument(outputPath + " Not Found");
+    }
+    outfile << content << endl;
+}
 
 /**
  * Parse string to int.
@@ -27,7 +56,7 @@ int ExtractData::parseStringToInt(const string &s) {
  * @param str the string representation of the distance.
  * @return the distance object
  */
-Distance* ExtractData::getDistanceByStr(const string &str) {
+Distance *ExtractData::getDistanceByStr(const string &str) {
     Distance *d;
     if (str == "AUC") {
         d = new EuclideanDistance();
@@ -105,7 +134,8 @@ vector<Neighbor> ExtractData::fileToVec(string fileAddress) {
     vector<Neighbor> neighbors;
     //open a file in read mode
     ifstream infile;
-    infile.open("Data/" + fileAddress, ios::in); // try open relative path (relative to our environment - classifiedServer)
+    infile.open("Data/" + fileAddress,
+                ios::in); // try open relative path (relative to our environment - classifiedServer)
     if (!infile) {
         infile.open(fileAddress, ios::in); // try open absolute path
         if (!infile) {
@@ -133,7 +163,7 @@ vector<Neighbor> ExtractData::fileToVec(string fileAddress) {
             }
         }
         if (vectorsSize)
-        measurementsVector = strVectorToDouble(specificVector);
+            measurementsVector = strVectorToDouble(specificVector);
         neighbors.push_back(Neighbor(measurementsVector, vectorClass));
     }
     infile.close();
