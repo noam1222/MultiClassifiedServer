@@ -16,7 +16,7 @@ class Command {
 protected:
     string m_description;
     DefaultIO *m_df;
-    CommandsData m_data;
+    CommandsData &m_data;
     Command(string description, DefaultIO *df, CommandsData &data);
 public:
     virtual void execute() = 0;

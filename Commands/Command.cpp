@@ -6,10 +6,9 @@
  * @param df the IO to write from or read to
  * @param data the shared data of the commands
  */
-Command::Command(string description, DefaultIO *df, CommandsData &data) {
+Command::Command(string description, DefaultIO *df, CommandsData &data) : m_data(data) {
     m_description = description;
     m_df = df;
-    m_data = data;
 }
 
 /**

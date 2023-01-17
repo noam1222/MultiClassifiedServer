@@ -96,7 +96,6 @@ void displayResults(SocketIO *socketIo) {
 
 void downResults(SocketIO *socketIo) {
     string waitForEnter;
-    string pathToDownload;
     string fileToDownload = socketIo->read();
     //receive path from user
     string path;
@@ -112,8 +111,6 @@ void downResults(SocketIO *socketIo) {
 }
 
 int main(int argc, char **argv) {
-    //Connection to server socket
-    cout << argv[0] << endl;
     if (argc != 3) {
         cout << INVALID_INPUT << endl;
     }
@@ -154,7 +151,7 @@ int main(int argc, char **argv) {
 
     SocketIO *socketIo = new SocketIO(sock);
     string mainMenu = socketIo->read();
-    cout << mainMenu << endl;
+    cout << mainMenu;
     bool toRun = true;
     //loop with user
     while (true) {
@@ -201,9 +198,8 @@ int main(int argc, char **argv) {
             break;
         }
         //printing main menu in loop
-        cout << mainMenu << endl;
+        cout << mainMenu;
     }
-
     close(sock);
     return 0;
 }

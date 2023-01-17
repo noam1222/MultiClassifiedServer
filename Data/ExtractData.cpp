@@ -16,6 +16,8 @@ string ExtractData::readFromFile(string filepath) {
         content += line + "\n";
     }
 
+    content = content.substr(0, content.size()-1); //remove last '\n'
+
     infile.close();
     return content;
 }
