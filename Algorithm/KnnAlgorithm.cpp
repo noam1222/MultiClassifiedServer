@@ -46,7 +46,7 @@ string KnnAlgorithm::findMostCommonString() {
     //if k > neighbors size, find the nearest from all the neighbors
     unsigned int k = m_k;
     if (k > m_neighbors.size()) {
-        k = m_neighbors.size();
+        throw invalid_argument("K bigger than number of neighbors");
     }
     string mostCommonString = "";
     int mostCommonStringRepeat = 0;

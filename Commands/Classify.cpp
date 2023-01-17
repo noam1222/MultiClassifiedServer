@@ -22,13 +22,14 @@ void Classify::execute() {
 
     string unclassifiedName = m_data.getUnclassifiedFileName();
     ifstream sourceFile(unclassifiedName);
-    string resultFileName = "result_" + unclassifiedName;
+    size_t delim = unclassifiedName.find(".csv");
+    string resultFileName = unclassifiedName.substr(0, delim) + "_result.csv";
     ofstream resultFile(resultFileName);
     string line;
     try {
         int lineNum = 1;
         while (getline(sourceFile, line)) {
-            vector<string> vecToCompStr = ExtractData::splitString(line, " ");
+            vector<string> vecToCompStr = ExtractData::splitString(line, ",");
             vector<double> vecToComp = ExtractData::strVectorToDouble(vecToCompStr);
             string result = knn.getDefinition(vecToComp);
             resultFile << lineNum << " " << result << "\n";

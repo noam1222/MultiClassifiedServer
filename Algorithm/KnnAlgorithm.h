@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <stdexcept>
 #include <algorithm>
 #include "../Distances/Distance.h"
 #include "Neighbor.h"

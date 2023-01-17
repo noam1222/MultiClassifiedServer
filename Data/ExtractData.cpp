@@ -136,7 +136,7 @@ vector<Neighbor> ExtractData::fileToVec(string fileAddress) {
     vector<Neighbor> neighbors;
     //open a file in read mode
     ifstream infile;
-    infile.open("Data/" + fileAddress,
+    infile.open(fileAddress,
                 ios::in); // try open relative path (relative to our environment - classifiedServer)
     if (!infile) {
         infile.open(fileAddress, ios::in); // try open absolute path
