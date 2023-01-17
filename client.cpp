@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <fstream>
 #include <sys/socket.h>
 #include <stdio.h>
 #include <netinet/in.h>
@@ -8,6 +9,7 @@
 #include <string.h>
 #include "Data/ExtractData.h"
 #include "SocketIO.h"
+#include <thread>
 
 #define END_MSG "EOF"
 #define INVALID_INPUT "invalid input"
@@ -96,8 +98,17 @@ void displayResults(SocketIO *socketIo) {
     }
 }
 
-void downResults(SocketIO *socketIo) {
-    string waitForEnter;
+void downloadFile(string path, string fileToDownload) {
+    //checks if able to write to path
+    try{
+        ExtractData::writeToFile(path, fileToDownload);
+    }catch (invalid_argument) {
+        cout << path + "Not Found" << endl;
+        return;
+    }
+}
+
+void recDownloadPath(SocketIO *socketIo) {
     string fileToDownload = socketIo->read();
     if (fileToDownload == "please upload data" || fileToDownload == "please classify the data") {
         cout << fileToDownload << endl;
@@ -106,15 +117,19 @@ void downResults(SocketIO *socketIo) {
     //receive path from user
     string path;
     getline(cin, path);
-    //checks if path is valid
-    try{
-        ExtractData::writeToFile(path, fileToDownload);
-    }catch (invalid_argument) {
-        cout << path + "Not Found" << endl;
+    //checks if path exists
+    ofstream outfile;
+    outfile.open(path, ios::out);
+    if(!outfile) {
+        cout << INVALID_INPUT << endl;
         return;
     }
-    getline(cin, waitForEnter);
+    //creating separate thread for the downloading process
+    thread downloadThread(&downloadFile,path, fileToDownload);
+    downloadThread.detach();
 }
+
+
 
 int main(int argc, char **argv) {
     if (argc != 3) {
@@ -190,14 +205,14 @@ int main(int argc, char **argv) {
                 break;
             case 5:
                 socketIo->write(input);
-                downResults(socketIo);
+                recDownloadPath(socketIo);
                 break;
             case 8:
                 socketIo->write(input);
                 toRun = false;
                 break;
             default:
-                cout << "Invalid Option" << endl;
+                cout << INVALID_INPUT << endl;
         }
         //if user wants to close connection
         if (!(toRun)) {
