@@ -183,6 +183,7 @@ int main(int argc, char **argv) {
             option = ExtractData::parseStringToInt(input);
         } catch (invalid_argument) {
             cout << INVALID_INPUT << endl;
+            cout << mainMenu;
             continue;
         }
         switch (option) {
@@ -214,7 +215,7 @@ int main(int argc, char **argv) {
                 cout << INVALID_INPUT << endl;
         }
         //if user wants to close connection
-        if (!(toRun)) {
+        if (!toRun) {
             break;
         }
         //printing main menu in loop
