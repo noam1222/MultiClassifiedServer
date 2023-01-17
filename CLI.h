@@ -19,7 +19,7 @@ private:
     CommandsData m_data;
     void menu();
 public:
-    CLI(DefaultIO *df);
+    CLI(DefaultIO *df, int threadNum);
     void run();
     ~CLI();
 };

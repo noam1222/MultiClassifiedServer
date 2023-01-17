@@ -3,11 +3,19 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <atomic>
+#include <thread>
 #include "Data/ExtractData.h"
 #include "SocketIO.h"
 #include "CLI.h"
 
 using namespace std;
+
+void startChat(int sockNum, int threadID) {
+    SocketIO sio(sockNum);
+    CLI cli(&sio, threadID);
+    cli.run();
+}
 
 void fatalError(const string &msg) {
     cout << msg << endl;
@@ -47,19 +55,20 @@ int main(int argc, char **argv) {
     if (listen(sock, 5) < 0) {
         fatalError("Error in listening");
     }
-
-    //accept client
-    struct sockaddr_in client_sin{};
-    unsigned int client_sin_len = sizeof(client_sin);
-    int client_sock = accept(sock, (struct sockaddr *) &client_sin, &client_sin_len);
-    if (client_sock < 0) {
-        fatalError("Error in accept client");
+    atomic_int threadNum;
+    threadNum = 0;
+    while (true) {
+        //accept client
+        struct sockaddr_in client_sin{};
+        unsigned int client_sin_len = sizeof(client_sin);
+        int client_sock = accept(sock, (struct sockaddr *) &client_sin, &client_sin_len);
+        if (client_sock < 0) {
+            fatalError("Error in accept client");
+        }
+        threadNum++;
+        thread c(&startChat, client_sock, (int)threadNum);
+        c.detach();
     }
-
-    //contact with client
-    SocketIO sio(client_sock);
-    CLI cli(&sio);
-    cli.run();
 
     close(sock);
     return 0;

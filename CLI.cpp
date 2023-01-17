@@ -4,9 +4,8 @@
  * constructor. initialize this m_commands - Upload, Setting, Classify, Display and Download.
  * @param df the IO to write from or read to.
  */
-CLI::CLI(DefaultIO *df) {
+CLI::CLI(DefaultIO *df, int threadNum) : m_data(threadNum) {
     m_df = df;
-    m_data = CommandsData();
     m_commands[0] = new Upload(m_df, m_data);
     m_commands[1] = new Settings(m_df, m_data);
     m_commands[2] = new Classify(m_df, m_data);

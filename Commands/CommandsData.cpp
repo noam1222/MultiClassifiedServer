@@ -3,12 +3,19 @@
 /**
  * constructor. as request, initialize k to 5 and distance method to euclidean.
  */
-CommandsData::CommandsData() {
+CommandsData::CommandsData(int threadNum) {
+    m_threadNum = threadNum;
     m_uploaded = false;
     m_classified = false;
     m_k = 5;
     m_distanceMethodStr = "AUC";
 }
+
+/**
+ * get the thread number of this chat.
+ * @return the thread number of this chat.
+ */
+int CommandsData::getThreadNumber() const { return m_threadNum; }
 
 /**
  * check if the client already upload files.

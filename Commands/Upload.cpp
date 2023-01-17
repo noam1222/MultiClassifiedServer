@@ -17,7 +17,7 @@ void Upload::execute() {
     if (!content.length()) {
         return;
     }
-    string path = PATH + "classified.csv";
+    string path = PATH + to_string(m_data.getThreadNumber()) + "classified.csv";
     ExtractData::writeToFile(path, content);
     m_data.setClassifiedFilePath(path);
     m_df->write("Upload complete.");
@@ -27,7 +27,7 @@ void Upload::execute() {
     if (!content.length()) {
         return;
     }
-    path = PATH + "unclassified.csv";
+    path = PATH + "unclassified" + to_string(m_data.getThreadNumber()) + ".csv";
     ExtractData::writeToFile(path, content);
     m_data.setUnclassifiedFilePath(path);
     m_df->write("Upload complete.");
