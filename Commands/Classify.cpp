@@ -23,7 +23,7 @@ void Classify::execute() {
     string unclassifiedName = m_data.getUnclassifiedFileName();
     ifstream sourceFile(unclassifiedName);
     size_t delim = unclassifiedName.find(".csv");
-    string resultFileName = unclassifiedName.substr(0, delim) + "_result.csv";
+    string resultFileName = unclassifiedName.substr(0, delim) + to_string(m_data.getThreadNumber()) + "_result.csv";
     ofstream resultFile(resultFileName);
     string line;
     try {

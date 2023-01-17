@@ -10,6 +10,7 @@ using namespace std;
  */
 class CommandsData {
 private:
+    int m_threadNum;
     bool m_uploaded;
     bool m_classified;
     unsigned int m_k;
@@ -18,7 +19,8 @@ private:
     string m_unclassifiedFilePath;
     string m_resultFileName;
 public:
-    CommandsData();
+    CommandsData(int threadNum);
+    int getThreadNumber() const;
     bool hasUploadedFiles() const;
     bool hasClasiifiedFile() const;
     unsigned int getK() const;
