@@ -30,13 +30,15 @@ void CLI::menu() {
  */
 void CLI::run() {
     menu();
-    int choose = ExtractData::parseStringToInt(m_df->read());
-    choose--;
-    while (choose != 8) {
-        m_commands[choose]->execute();
-        choose = ExtractData::parseStringToInt(m_df->read());
+    do {
+        string c = m_df->read();
+        if (c == "") {
+            break;
+        }
+        int choose = ExtractData::parseStringToInt(c);
         choose--;
-    }
+        m_commands[choose]->execute();
+    } while (true);
 }
 
 CLI::~CLI() {
