@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <sys/socket.h>
@@ -125,7 +124,7 @@ void recDownloadPath(SocketIO *socketIo) {
         return;
     }
     //creating separate thread for the downloading process
-    thread downloadThread(&downloadFile,path, fileToDownload);
+    std::thread downloadThread(&downloadFile,ref(path), ref(fileToDownload));
     downloadThread.detach();
 }
 
@@ -208,7 +207,7 @@ int main(int argc, char **argv) {
                 recDownloadPath(socketIo);
                 break;
             case 8:
-                socketIo->write(input);
+                close(sock);
                 toRun = false;
                 break;
             default:
@@ -221,6 +220,6 @@ int main(int argc, char **argv) {
         //printing main menu in loop
         cout << mainMenu;
     }
-    close(sock);
+
     return 0;
 }

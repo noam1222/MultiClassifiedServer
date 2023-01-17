@@ -20,5 +20,5 @@ void Display::execute() {
         return;
     }
     string result = ExtractData::readFromFile(m_data.getResultFileName());
-    m_df->write(result + "Done.");
+    m_df->write(result + "\nDone.");
 }
