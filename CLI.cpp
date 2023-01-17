@@ -37,7 +37,7 @@ void CLI::run() {
         }
         int choose = ExtractData::parseStringToInt(c);
         choose--;
-        m_commands[choose]->execute() ;
+        m_commands[choose]->execute();
     } while (true);
 }
 
