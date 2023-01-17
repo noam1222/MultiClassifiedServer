@@ -91,12 +91,18 @@ void displayResults(SocketIO *socketIo) {
     string waitForEnter;
     string display = socketIo->read();
     cout << display << endl;
-    getline(cin, waitForEnter);
+    if (display != "please upload data" && display != "please classify the data") {
+        getline(cin, waitForEnter);
+    }
 }
 
 void downResults(SocketIO *socketIo) {
     string waitForEnter;
     string fileToDownload = socketIo->read();
+    if (fileToDownload == "please upload data" || fileToDownload == "please classify the data") {
+        cout << fileToDownload << endl;
+        return;
+    }
     //receive path from user
     string path;
     getline(cin, path);
