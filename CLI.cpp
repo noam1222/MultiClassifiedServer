@@ -45,4 +45,5 @@ CLI::~CLI() {
     for (int i = 0; i < 5; i++) {
         free (m_commands[i]);
     }
+    free(m_df);
 }

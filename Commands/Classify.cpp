@@ -36,10 +36,11 @@ void Classify::execute() {
             lineNum++;
         }
         m_df->write("classifying data complete");
-        m_data.Classified();
+        m_data.Classified(true);
         m_data.setResultFileName(resultFileName);
     } catch (invalid_argument &e) {
         m_df->write("invalid input");
+        m_data.Classified(false);
     }
     sourceFile.close();
     resultFile.close();

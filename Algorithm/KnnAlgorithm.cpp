@@ -75,6 +75,9 @@ string KnnAlgorithm::findMostCommonString() {
  * @return definition of vecToComp base of k nearest neighbors.
  */
 string KnnAlgorithm::getDefinition(vector<double> vecToComp) {
+    if (vecToComp.size() != m_neighbors.at(0).getVector().size()) {
+        throw invalid_argument("wrong size");
+    }
     setDistanceToNeighbors(vecToComp);
     sort(m_neighbors.begin(), m_neighbors.end(), sortByVec);
     return findMostCommonString();

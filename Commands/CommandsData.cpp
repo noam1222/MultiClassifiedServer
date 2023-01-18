@@ -62,12 +62,12 @@ string CommandsData::getResultFileName() const {return m_resultFileName;}
 /**
  * mark that the client uploaded the requested files
  */
-void CommandsData::Uploaded() {m_uploaded = true;}
+void CommandsData::Uploaded(bool b) {m_uploaded = b;}
 
 /**
  * mark that the requested files classified
  */
-void CommandsData::Classified() {m_classified = true;}
+void CommandsData::Classified(bool b) {m_classified = b;}
 
 /**
  * set the K of the algorithm

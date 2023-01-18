@@ -28,8 +28,8 @@ public:
     string getClassifiedFileName() const;
     string getUnclassifiedFileName() const;
     string getResultFileName() const;
-    void Uploaded();
-    void Classified();
+    void Uploaded(bool b);
+    void Classified(bool b);
     void setK(unsigned int k);
     void setDistanceMethod(string distanceMethod);
     void setClassifiedFilePath(string classifiedFilePath);

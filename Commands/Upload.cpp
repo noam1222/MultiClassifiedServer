@@ -15,6 +15,7 @@ void Upload::execute() {
     m_df->write("Please upload your local train CSV file.");
     string content = m_df->read();
     if (!content.length()) {
+        m_data.Uploaded(false);
         return;
     }
     string path = PATH + to_string(m_data.getThreadNumber()) + "classified.csv";
@@ -23,6 +24,7 @@ void Upload::execute() {
     m_df->write("Upload complete.\nPlease upload your local test CSV file.");
     content = m_df->read();
     if (!content.length()) {
+        m_data.Uploaded(false);
         return;
     }
     path = PATH + "unclassified" + to_string(m_data.getThreadNumber()) + ".csv";
@@ -30,5 +32,5 @@ void Upload::execute() {
     m_data.setUnclassifiedFilePath(path);
     m_df->write("Upload complete.");
 
-    m_data.Uploaded(); //notice that the user upload the files
+    m_data.Uploaded(true); //notice that the user upload the files
 }
