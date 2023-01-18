@@ -16,8 +16,9 @@ First input for client should be: `ip port`:
 If any of this inputs will be invalid, the program will terminate.
 
 ### User Input
+**Very important:** All the files **have** to be in Unix format[^1].</br>
 The server will sent the client a menu and the client should choose one of the following:
-- 1 - The server will ask the client to enter the classified object file path[^1].</br>
+- 1 - The server will ask the client to enter the classified object file path.</br>
 If the path is valid and the the upload has been done, the server will ask to upload the unclassified objects file.</br>
 as before, if the path is valid and the the upload has been done the server wiil notify about it and the menu will appear again.
 - 2 - The K and the distance method of the server algorithm will appear on the screen:</br>
@@ -52,6 +53,6 @@ Then, the menu should appear and the program should run as described in [user in
 - The make program.
 - Classified objects file for the server.
 
-[^1]: The files **have** to be in Unix format. the command `dos2unix file_path` can be helpfull.
+[^1]: The command `dos2unix file_path` can be helpfull.
 [^2]: According to this distance algorithm if both parameters of the two vectors are 0, then it doesn't have any effect on the calculation of the sum.
 [^3]: We defined the P of this distance algorithm to be the constant - 2.
