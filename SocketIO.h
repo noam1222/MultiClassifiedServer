@@ -4,6 +4,7 @@
 #include "DefaultIO.h"
 #include <string.h>
 #include <sys/socket.h>
+#include <mutex>
 
 #define BUFFER_SIZE 4096
 #define MSG_END "EOF"
@@ -18,6 +19,7 @@ private:
     int m_sockNum;
     char m_buffer[BUFFER_SIZE];
     size_t m_bufferSize;
+    mutex m_mutex;
     void clearBuffer();
     void sendBufferSizeOrLess(string s);
 public:

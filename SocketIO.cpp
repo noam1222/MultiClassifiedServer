@@ -61,6 +61,7 @@ void SocketIO::sendBufferSizeOrLess(string s) {
  * @param s data to send to client.
  */
 void SocketIO::write(string s) {
+    const lock_guard<mutex> lock(m_mutex);
     s += MSG_END;
     while (s.length() > BUFFER_SIZE) {
         string toSend = s.substr(0, 4096);

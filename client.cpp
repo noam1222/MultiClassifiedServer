@@ -29,7 +29,7 @@ void uploadFile(SocketIO *socketIo) {
         try {
             fileToUpload = ExtractData::readFromFile(path);
         } catch (invalid_argument) {
-            cout << path + " Not Found" << endl;
+            cout << INVALID_INPUT << endl;
             socketIo->write("");
             return;
         }
@@ -38,7 +38,6 @@ void uploadFile(SocketIO *socketIo) {
         uploadFin = socketIo->read();
         cout << uploadFin << endl;
     }
-
 }
 
 void editSettings(SocketIO *socketIo) {
@@ -102,7 +101,7 @@ void downloadFile(string path, string fileToDownload) {
     try{
         ExtractData::writeToFile(path, fileToDownload);
     }catch (invalid_argument) {
-        cout << path + "Not Found" << endl;
+        cout << INVALID_INPUT << endl;
         return;
     }
 }
