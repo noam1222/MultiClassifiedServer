@@ -108,7 +108,7 @@ vector<double> ExtractData::strVectorToDouble(vector<string> vStr) {
     vector<double> vDouble;
     for (int i = 0; i < vStr.size(); i++) {
         string strDouble = vStr.at(i);
-        /*
+        /**
         next_loc used for checking if the user inserted a.b.c (where a, b are
         decimal numbers and c is any string).
         In that case stod will return a.b and not throw invalid_argument exception.
