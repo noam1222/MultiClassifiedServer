@@ -45,7 +45,7 @@ To return to menu press `Enter`.</br>
 
 ### Run
 Clone this repsitory and then in the repo folder type `make` or `make run`, wait for the compilation to end and than type `./server.out port` as described in [user input](https://github.com/noam1222/MultiClassifiedServer#input-to-start-the-program). </br>
-**Very important:** the server must run in a folder that contains another folder that has the name `clients_data`.
+**Very important:** the server must run in a folder that contains another folder that has the name `clients_data`.</br>
 Then, in **another terminal** that open the repo folder and type `./client.out ip port` as described in [user input](https://github.com/noam1222/MultiClassifiedServer#input-to-start-the-program). </br>
 Then, the menu should appear and the program should run as described in [user input](https://github.com/noam1222/MultiClassifiedServer#user-input).</br>
 To clean all the objects and out files that have been created use `make clean`.
