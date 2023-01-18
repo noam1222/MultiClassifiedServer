@@ -18,26 +18,39 @@ using namespace std;
 void uploadFile(SocketIO *socketIo) {
     string uploadFin;
     //receive from server to print train/test CSV
-    for (int i = 1; i < 3; ++i) {
-        string ret = socketIo->read();
-        cout << ret << endl;
-        //receive path from user
-        string path;
-        getline(cin, path);
-        //checks if path is valid
-        string fileToUpload;
-        try {
-            fileToUpload = ExtractData::readFromFile(path);
-        } catch (invalid_argument) {
-            cout << INVALID_INPUT << endl;
-            socketIo->write("");
-            return;
-        }
-        socketIo->write(fileToUpload);
-        //waiting for response from server that upload is complete
-        uploadFin = socketIo->read();
-        cout << uploadFin << endl;
+    string ret = socketIo->read();
+    cout << ret << endl;
+    //receive path from user
+    string path;
+    getline(cin, path);
+    //checks if path is valid
+    string fileToUpload;
+    try {
+        fileToUpload = ExtractData::readFromFile(path);
+    } catch (invalid_argument) {
+        cout << INVALID_INPUT << endl;
+        socketIo->write("");
+        return;
     }
+    socketIo->write(fileToUpload);
+    //waiting for response from server that upload is complete
+    uploadFin = socketIo->read();
+    cout << uploadFin << endl;
+
+    //receive path from user
+    getline(cin, path);
+    //checks if path is valid
+    try {
+        fileToUpload = ExtractData::readFromFile(path);
+    } catch (invalid_argument) {
+        cout << INVALID_INPUT << endl;
+        socketIo->write("");
+        return;
+    }
+    socketIo->write(fileToUpload);
+    //waiting for response from server that upload is complete
+    uploadFin = socketIo->read();
+    cout << uploadFin << endl;
 }
 
 void editSettings(SocketIO *socketIo) {
@@ -90,9 +103,11 @@ void classData(SocketIO *socketIo) {
 void displayResults(SocketIO *socketIo) {
     string waitForEnter;
     string display = socketIo->read();
-    cout << display << endl;
+    cout << display;
     if (display != "please upload data" && display != "please classify the data") {
         getline(cin, waitForEnter);
+    } else {
+        cout << endl;
     }
 }
 
@@ -123,7 +138,7 @@ void recDownloadPath(SocketIO *socketIo) {
         return;
     }
     //creating separate thread for the downloading process
-    std::thread downloadThread(&downloadFile,ref(path), ref(fileToDownload));
+    std::thread downloadThread(downloadFile,path, fileToDownload);
     downloadThread.detach();
 }
 

@@ -20,9 +20,7 @@ void Upload::execute() {
     string path = PATH + to_string(m_data.getThreadNumber()) + "classified.csv";
     ExtractData::writeToFile(path, content);
     m_data.setClassifiedFilePath(path);
-    m_df->write("Upload complete.");
-
-    m_df->write("Please upload your local test CSV file.");
+    m_df->write("Upload complete.\nPlease upload your local test CSV file.");
     content = m_df->read();
     if (!content.length()) {
         return;
