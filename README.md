@@ -44,8 +44,8 @@ To return to menu press `Enter`.</br>
 - 8 - Exit the program.
 
 ### Run
-Clone this repsitory and then in the repo folder type `make` or `make run`, wait for the compilation to end and than type `./server.out port` as described in [user input](https://github.com/noam1222/MultiClassifiedServer/edit/main/README.md#input-to-start-the-program). </br>
-Then, in **another terminal** that open the repo folder and type `./client.out ip port` as described in [user input](https://github.com/noam1222/MultiClassifiedServer/edit/main/README.md#input-to-start-the-program). </br>
+Clone this repsitory and then in the repo folder type `make` or `make run`, wait for the compilation to end and than type `./server.out port` as described in [user input](https://github.com/noam1222/MultiClassifiedServer#input-to-start-the-program). </br>
+Then, in **another terminal** that open the repo folder and type `./client.out ip port` as described in [user input](https://github.com/noam1222/MultiClassifiedServer#input-to-start-the-program). </br>
 Then, the menu should appear and the program should run as described in [user input](https://github.com/noam1222/MultiClassifiedServer/edit/main/README.md#user-input).</br>
 
 ## Requierments
