@@ -1,0 +1,2 @@
+the clients upload data will be in here.
+the server *must* run with this folder in his relative path!
