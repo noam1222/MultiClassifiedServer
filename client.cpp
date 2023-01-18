@@ -207,6 +207,7 @@ int main(int argc, char **argv) {
                 recDownloadPath(socketIo);
                 break;
             case 8:
+                free(socketIo);
                 close(sock);
                 toRun = false;
                 break;
