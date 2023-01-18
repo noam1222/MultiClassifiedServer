@@ -31,8 +31,8 @@ As before, if the path is valid and the the upload has been done the server wiil
     - `CAN` - [Canberra distance](https://en.wikipedia.org/wiki/Canberra_distance)[^2].
     - `MIN` - [Minkowski distance](https://en.wikipedia.org/wiki/Minkowski_distance)[^3].
     
-If this is ok, the client should press `Enter`.</br>
-Otherwise enter the new settings for the algorithm in this pattern: `k distance_method` and then `Enter`.</br>
+  If this is ok, the client should press `Enter`.</br>
+  Otherwise enter the new settings for the algorithm in this pattern: `k distance_method` and then `Enter`.</br>
 - 3 - Order the server to classify the objects in the unclassified objects file.</br>
 *Pay attention:* the clients should first upload the files.
 - 4 - Will make the result of option number 3 to appear on the screen in this pattern:
