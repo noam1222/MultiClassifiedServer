@@ -16,8 +16,16 @@ void Classify::execute() {
         return;
     }
     unsigned int k = m_data.getK();
-    vector<Neighbor> neighbors = ExtractData::fileToVec(m_data.getClassifiedFileName());
-    Distance *d = ExtractData::getDistanceByStr(m_data.getDistanceMethod());
+    vector <Neighbor> neighbors;
+    Distance *d;
+    try {
+        neighbors = ExtractData::fileToVec(m_data.getClassifiedFileName());
+        d = ExtractData::getDistanceByStr(m_data.getDistanceMethod());
+    } catch (invalid_argument &e) {
+        m_df->write("invalid input");
+        m_data.Classified(false);
+        return;
+    }
     KnnAlgorithm knn(k, neighbors, d);
 
     string unclassifiedName = m_data.getUnclassifiedFileName();
