@@ -20,7 +20,8 @@ If any of these inputs will be invalid, the program will terminate.
 The server will sent the client a menu and the client should choose one of the following:
 - 1 - The server will ask the client to enter the classified object file path.</br>
 If the path is valid and the the upload has been done, the server will ask to upload the unclassified objects file.</br>
-As before, if the path is valid and the the upload has been done the server wiil notify the client regarding this and the menu will appear again.
+As before, if the path is valid and the the upload has been done the server wiil notify the client regarding this and the menu will appear again.</br>
+*pay attention*: If the files arn't valid, the server will notify about it in option number 3 (the classifying).
 - 2 - The K and the distance method of the server algorithm will appear on the screen:</br>
   - k - the amount of neighbors the classification should be according to. </br>
   - distance - distance method to define "nearest". Should be in this pattern:
@@ -30,8 +31,8 @@ As before, if the path is valid and the the upload has been done the server wiil
     - `CAN` - [Canberra distance](https://en.wikipedia.org/wiki/Canberra_distance)[^2].
     - `MIN` - [Minkowski distance](https://en.wikipedia.org/wiki/Minkowski_distance)[^3].
     
-If this is ok, the client should press `Enter`.</br>
-Otherwise enter the new settings for the algorithm in this pattern: `k distance_method` and then `Enter`.</br>
+  If this is ok, the client should press `Enter`.</br>
+  Otherwise enter the new settings for the algorithm in this pattern: `k distance_method` and then `Enter`.</br>
 - 3 - Order the server to classify the objects in the unclassified objects file.</br>
 *Pay attention:* the clients should first upload the files.
 - 4 - Will make the result of option number 3 to appear on the screen in this pattern:
