@@ -1,4 +1,3 @@
-
 #include "KnnAlgorithm.h"
 
 /**
@@ -57,6 +56,7 @@ string KnnAlgorithm::findMostCommonString() {
         // check if first occurrence of definition
         if (iter == mostCommon.end()) {
             repeats = 1;
+            mostCommon[definition] = repeats;
         } else {
             iter->second++;
             repeats = iter->second;
